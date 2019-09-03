@@ -23,11 +23,12 @@ export default class Calculator extends React.Component {
         this.addDigit = this.addDigit.bind(this)
         this.setOperation = this.setOperation.bind(this)
     }
-
+    //LIMPAR MEMORIA
     clear(){
         this.setState({...initialState})
     }
 
+    //FUNÇAO PARA CALCULO DOS VALORES RECEBE COMO PARAMETRO O PRIMEIRO E SEGUNDO VALOR E TBM A OPERAÇÃO A SER REALIZADA
     calculate(n1, n2, op){
         let res = 0
         switch(op){
@@ -89,12 +90,11 @@ export default class Calculator extends React.Component {
                 historic: equals ? "" : this.state.historic + newHistoric,
                 values
             })
-            console.log(values, operation)
         }
     }
 
     addDigit(n){
-        //RETORNA SE O USUÁRIO TENTAR ADICIONAR MAIS DE UM PONTO (.)
+        //RETORNA VAZIO SE O USUÁRIO TENTAR ADICIONAR MAIS DE UM PONTO (.)
         if(n === "." && this.state.displayValue.includes(".")){
             return
         }
@@ -105,11 +105,10 @@ export default class Calculator extends React.Component {
             let values = [...this.state.values]
             values[current] = (values[current]) * (-1)
             this.setState({values, displayValue: values[current]})
-            console.log(values)
             return
         }
 
-        //LIMPAR DISPLAY CASO CLEARDISPLAY SEJA TRUE
+        //LIMPAR DISPLAY CASO CLEARDISPLAY SEJA TRUE E DISPLAYVALUE IGUAL A 0
         const clearDisplay = this.state.displayValue === "0" || this.state.clearDisplay
         const currentValue = clearDisplay ? "" : this.state.displayValue
         const displayValue = currentValue + n
@@ -121,7 +120,6 @@ export default class Calculator extends React.Component {
             let values = [...this.state.values]
             values[current] = newValue
             this.setState({values})
-            console.log(values)
         }
 
     }
